@@ -1144,7 +1144,7 @@ public class WrappedPlayer implements Player {
 
     @Override
     public double getHealth() {
-        return 0;
+        return player.getHealth();
     }
 
     @Override
