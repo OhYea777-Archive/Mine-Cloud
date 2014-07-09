@@ -1,0 +1,8 @@
+name: MineCloud
+version: 0.1
+main: com.ohyea777.minecloud.MineCloud
+authors: [OhYea777]
+
+commands:
+  test:
+    aliases: [t]
