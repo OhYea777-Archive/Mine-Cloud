@@ -1,0 +1,24 @@
+{
+    "ranks": [
+        {
+            "group": "a",
+            "localisedName": "Block A",
+            "isDefaultRank": true
+        },
+        {
+            "group": "b",
+            "localisedName": "Block B",
+            "cost": 1000.0
+        },
+        {
+            "group": "c",
+            "localisedName": "Block C",
+            "cost": 2000.0
+        },
+        {
+            "group": "d",
+            "localisedName": "Block D",
+            "cost": 3000.0
+        }
+    ]
+}
