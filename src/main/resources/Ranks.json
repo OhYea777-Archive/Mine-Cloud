@@ -11,6 +11,11 @@
             "cost": 1000.0
         },
         {
+            "group": "donor",
+            "localisedName": "Donor",
+            "isSubRank": true
+        },
+        {
             "group": "c",
             "localisedName": "Block C",
             "cost": 2000.0

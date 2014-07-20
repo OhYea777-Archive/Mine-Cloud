@@ -55,10 +55,10 @@ public class RankRegistry {
     }
 
     public Rank getNextRank(Rank rank) {
-        if (ranks.contains(rank)) {
+        if (ranks.contains(rank) && !rank.isSubRank()) {
             for (int i = ranks.indexOf(rank) + 1; i < ranks.size(); i ++) {
-                if (ranks.get(i) != null) {
-                    return !ranks.get(i).isSubRank() ? ranks.get(i) : null;
+                if (ranks.get(i) != null && !ranks.get(i).isSubRank()) {
+                    return ranks.get(i);
                 }
             }
         }
@@ -67,7 +67,7 @@ public class RankRegistry {
     }
 
     public boolean hasNextRank(Rank rank) {
-        return getNextRank(rank) != null;
+        return getNextRank(rank) != null && !rank.isSubRank();
     }
 
     public static RankRegistry load(File file) {
