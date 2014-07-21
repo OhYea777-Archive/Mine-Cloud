@@ -5,6 +5,7 @@ import net.minecraft.util.org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public class RankRegistry {
     }
 
     public void init() {
+        groupRanks = new HashMap<String, Rank>();
+
         for (Rank rank : ranks) {
             groupRanks.put(rank.getGroup(), rank);
         }

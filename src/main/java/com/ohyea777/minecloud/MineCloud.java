@@ -6,6 +6,7 @@ import com.ohyea777.minecloud.util.VaultUtils;
 import com.ohyea777.minecloud.util.WrapUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +18,7 @@ public class MineCloud extends JavaPlugin {
 
     private VaultUtils vaultUtils;
     private RankRegistry rankRegistry;
+    private YamlConfiguration langConfiguration;
 
     @Override
     public void onEnable() {
@@ -61,12 +63,23 @@ public class MineCloud extends JavaPlugin {
 
     public void onReload() {
         rankRegistry = RankRegistry.load(new File(getDataFolder(), "Ranks.json"));
+        File langFile = new File(getDataFolder(), "Lang.yml");
 
         if (rankRegistry == null) {
             saveResource("Ranks.json", true);
 
             rankRegistry = RankRegistry.load(new File(getDataFolder(), "Ranks.json"));
         }
+
+        if (rankRegistry != null) {
+            rankRegistry.init();
+        }
+
+        if (!langFile.exists()) {
+            saveResource("Lang.yml", true);
+        }
+
+        langConfiguration = YamlConfiguration.loadConfiguration(langFile);
 
         reloadConfig();
     }
