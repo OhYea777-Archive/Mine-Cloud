@@ -1,2 +1,14 @@
 Options:
   Prefix: '&8[&bMineCloud&8]&7'
+  HelpFormat: '&8-&b] &e{help}&8: &7{command}'
+  NoPerm: '{prefix}&c You Do Not Have Permission to do That!'
+  InvalidCommand: '{prefix}&c That Command Does Not Exist!'
+  OnlyPrisoners: '{prefix}&c Only Prisoners Can do That!'
+  PlayersOnly: '{prefix}&c Players Only!'
+  EconomyFail: '{prefix}&c Economy Failure!'
+
+Messages:
+  Rankup:
+    HighestRank: '{prefix}&c You Are Already the Highest Rank!'
+    TooPoor: '{prefix}&c You Need &e${amount}&c More to Rank Up to &e{rank}&c! It costs &e${cost}&c to Rank Up!'
+    RankedUp: '{prefix} You Have Just Been Ranked Up to &e{rank}&7!'

@@ -23,6 +23,8 @@ public class MineCloud extends JavaPlugin {
         INSTANCE = this;
         vaultUtils = new VaultUtils(INSTANCE);
 
+        CommandManager.INSTANCE.init();
+
         onReload();
     }
 
@@ -33,7 +35,7 @@ public class MineCloud extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        return CommandManager.onCommand(sender, command, label, args);
+        return CommandManager.INSTANCE.onCommand(sender, command, label, args);
     }
 
     public VaultUtils getVaultUtils() {

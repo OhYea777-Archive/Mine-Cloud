@@ -6,3 +6,7 @@ authors: [OhYea777]
 commands:
   test:
     aliases: [t]
+  minecloud:
+    aliases: [mc]
+  rankup:
+    aliases: [ru,rup]

@@ -1,12 +1,14 @@
 package com.ohyea777.minecloud.player;
 
 import com.ohyea777.minecloud.MineCloud;
+import com.ohyea777.minecloud.lang.LanguageRegistry;
 import com.ohyea777.minecloud.prison.Rank;
 import com.ohyea777.minecloud.prison.RankRegistry;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -77,6 +79,26 @@ public class PrisonPlayer extends WrappedPlayer {
 
     public Rank getNextRank() {
         return getRankRegistry().getNextRank(getRank());
+    }
+
+    public void rankup() {
+        if (hasNextRank()) {
+            if (getBalance() >= getNextRank().getCost()) {
+                if (withdraw(getNextRank().getCost()).transactionSuccess()) {
+                    Rank nextRank = getNextRank();
+
+                    //Bukkit.getServer().ca
+
+                    sendMessage(LanguageRegistry.getFormatted("rankedup").replace("{rank}", nextRank.getGroup()));
+                } else {
+                    sendMessage(LanguageRegistry.getFormatted("econfail"));
+                }
+            } else {
+                sendMessage(LanguageRegistry.getFormatted("rankuptoopoor").replace("{amount}", "" + (getNextRank().getCost() - getBalance())).replace("{rank}", getNextRank().getLocalisedName()).replace("{cost}", "" + getNextRank().getCost()));
+            }
+        } else {
+            sendMessage(LanguageRegistry.getFormatted("highestrank"));
+        }
     }
 
 }

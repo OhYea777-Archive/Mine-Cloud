@@ -1,5 +1,6 @@
 package com.ohyea777.minecloud.command;
 
+import com.ohyea777.minecloud.lang.LanguageRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -20,8 +21,12 @@ public abstract class PrisonCommand {
         return "minecloud." + getName().toLowerCase();
     }
 
-    public boolean hasPermission(Player player) {
-        return usesPermissions() || player.hasPermission(getPermission());
+    public boolean hasPermission(CommandSender sender) {
+        return !usesPermissions() || sender.hasPermission(getPermission());
+    }
+
+    public String getNoPerm() {
+        return LanguageRegistry.getFormatted("noperm");
     }
 
     public abstract String[] getHelp();

@@ -16,6 +16,15 @@ public class LanguageRegistry {
         localisedLocations = new HashMap<String, String>();
 
         localisedLocations.put("prefix", "Options.Prefix");
+        localisedLocations.put("help", "Options.HelpFormat");
+        localisedLocations.put("noperm", "Options.NoPerm");
+        localisedLocations.put("nocmd", "Options.InvalidCommand");
+        localisedLocations.put("highestrank", "Messages.Rankup.HighestRank");
+        localisedLocations.put("rankuptoopoor", "Messages.Rankup.TooPoor");
+        localisedLocations.put("prisonersonly", "Options.OnlyPrisoners");
+        localisedLocations.put("playersonly", "Options.PlayersOnly");
+        localisedLocations.put("econfail", "Options.EconomyFail");
+        localisedLocations.put("rankedup", "Messages.Rankup.RankedUp");
     }
 
     public static void setConfiguration(YamlConfiguration configuration) {
@@ -31,7 +40,21 @@ public class LanguageRegistry {
     }
 
     public static String getFormatted(String location) {
-        return _(get(location).replace("{prefix}", get("prefix")));
+        return addPrefix(get(location));
+    }
+
+    public static String addPrefix(String s) {
+        return _(s.replace("{prefix}", get("prefix")));
+    }
+
+    public static String[] addPrefix(String... args) {
+        String[] formatted = new String[args.length];
+
+        for (int i = 0; i < args.length; i ++) {
+            formatted[i] = addPrefix(args[i]);
+        }
+
+        return formatted;
     }
 
     //public static String
