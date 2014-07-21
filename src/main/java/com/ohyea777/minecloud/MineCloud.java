@@ -1,13 +1,12 @@
 package com.ohyea777.minecloud;
 
-import com.ohyea777.minecloud.prison.Rank;
+import com.ohyea777.minecloud.command.CommandManager;
+import com.ohyea777.minecloud.lang.LanguageRegistry;
 import com.ohyea777.minecloud.prison.RankRegistry;
 import com.ohyea777.minecloud.util.VaultUtils;
-import com.ohyea777.minecloud.util.WrapUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -18,7 +17,6 @@ public class MineCloud extends JavaPlugin {
 
     private VaultUtils vaultUtils;
     private RankRegistry rankRegistry;
-    private YamlConfiguration langConfiguration;
 
     @Override
     public void onEnable() {
@@ -35,22 +33,7 @@ public class MineCloud extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-
-            if (WrapUtils.canWrap(player)) {
-                sender.sendMessage(WrapUtils.wrapPlayer(player).getRank().toString());
-            } else {
-                sender.sendMessage("Can't Wrap Your Player Instance!");
-            }
-        } else {
-            for (Rank rank : getRankRegistry().getRanks()) {
-                sender.sendMessage(rank.toString());
-                sender.sendMessage(String.format("Rank = '%s', nextRank = '%s'", rank.getLocalisedName(), getRankRegistry().hasNextRank(rank) ? getRankRegistry().getNextRank(rank).getLocalisedName() : "None"));
-            }
-        }
-
-        return true;
+        return CommandManager.onCommand(sender, command, label, args);
     }
 
     public VaultUtils getVaultUtils() {
@@ -79,7 +62,7 @@ public class MineCloud extends JavaPlugin {
             saveResource("Lang.yml", true);
         }
 
-        langConfiguration = YamlConfiguration.loadConfiguration(langFile);
+        LanguageRegistry.setConfiguration(YamlConfiguration.loadConfiguration(langFile));
 
         reloadConfig();
     }

@@ -21,11 +21,11 @@ public abstract class PrisonCommand {
     }
 
     public boolean hasPermission(Player player) {
-        return usesPermissions() ? true : player.hasPermission(getPermission());
+        return usesPermissions() || player.hasPermission(getPermission());
     }
 
     public abstract String[] getHelp();
 
-    public abstract boolean onCommand(Command command, CommandSender sender, String label, String[] args);
+    public abstract boolean onCommand(CommandSender sender, Command command, String label, String[] args);
 
 }
